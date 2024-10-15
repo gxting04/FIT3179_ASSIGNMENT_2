@@ -1,0 +1,123 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height":300,
+    "data": {
+      "url": "cleaned.csv",
+      "format": {"type": "csv"}
+    },
+    "params": [
+      {
+        "name": "state_selection",
+        "value": "Total",
+        "bind": {
+          "input": "select",
+          "options": [
+            "Total",
+            "Johor",
+            "Kedah",
+            "Kelantan",
+            "Melaka",
+            "Negeri Sembilan",
+            "Pahang",
+            "Perlis",
+            "Pulau Pinang",
+            "Sabah",
+            "Sarawak",
+            "Selangor",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+          ],
+          "labels": [
+            "Malaysia",
+            "Johor",
+            "Kedah",
+            "Kelantan",
+            "Melaka",
+            "Negeri Sembilan",
+            "Pahang",
+            "Perlis",
+            "Pulau Pinang",
+            "Sabah",
+            "Sarawak",
+            "Selangor",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+          ],
+          "name": "Select a state: "
+          
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "datum.state == state_selection"
+      },
+      {
+        "fold": ["Bumi", "Chinese", "Indian", "Others"],
+        "as": ["Ethnicity", "Percentage"]
+      },
+      {
+        "window": [
+          {"op": "sum", "field": "Percentage", "as": "CumulativePercentage"}
+        ],
+        "sort": [{"field": "Ethnicity"}]
+      },
+      {
+        "calculate": "(datum.CumulativePercentage - datum.Percentage / 2)", 
+        "as": "thetaMid"
+      },
+      {
+        "calculate": "datum.Percentage + '%'", 
+        "as": "PercentageWithSymbol"
+      }
+    ],
+    "layer": [
+      {
+        "mark": {
+          "type": "arc",
+          "innerRadius": 50,
+          "cornerRadius": 5
+        },
+        "encoding": {
+          "theta": {"field": "Percentage", "type": "quantitative"},
+          "color": {
+            "field": "Ethnicity",
+            "type": "nominal",
+            "scale": {
+              "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
+            }
+          },
+          "tooltip": [
+            {"field": "Ethnicity", "type": "nominal"},
+            {"field": "Percentage", "type": "quantitative", "format": ","}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "color": "black",
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "text": {
+            "field": "PercentageWithSymbol", 
+            "type": "nominal"
+          },
+          "theta": {"field": "thetaMid", "type": "quantitative"}, 
+          "radius": {"value": 115},
+          "color": {"value": "black"}  
+        }
+      }
+    ],
+    "config": {
+      "view": {"stroke": null},
+      "axis": {"grid": false},
+      "background": "aliceblue"
+    }
+  }
+  

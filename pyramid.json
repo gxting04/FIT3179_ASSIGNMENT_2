@@ -1,0 +1,194 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    
+    "data": {
+      "url": "cleaned.csv",
+      "format": {"type": "csv"}
+    },
+    "params": [
+      {
+        "name": "state_selection",
+        "value": "Total",
+        "bind": {
+          "input": "select",
+          "options": [
+            "Total",
+            "Johor",
+            "Kedah",
+            "Kelantan",
+            "Melaka",
+            "Negeri Sembilan",
+            "Pahang",
+            "Perlis",
+            "Pulau Pinang",
+            "Sabah",
+            "Sarawak",
+            "Selangor",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+          ],
+          "labels": [
+            "Malaysia",
+            "Johor",
+            "Kedah",
+            "Kelantan",
+            "Melaka",
+            "Negeri Sembilan",
+            "Pahang",
+            "Perlis",
+            "Pulau Pinang",
+            "Sabah",
+            "Sarawak",
+            "Selangor",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Labuan",
+            "Putrajaya"
+          ],
+          "name": "Select a state: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "datum.state == state_selection"
+      },
+      {
+        "fold": [
+          "male_18_20", "female_18_20", 
+          "male_21_29", "female_21_29", 
+          "male_30_39", "female_30_39", 
+          "male_40_49", "female_40_49", 
+          "male_50_59", "female_50_59", 
+          "male_60_69", "female_60_69", 
+          "male_70_79", "female_70_79", 
+          "male_80_89", "female_80_89", 
+          "male_90_above", "female_90_above"
+        ], 
+        "as": ["gender_age", "population"]
+      },
+      {
+        "calculate": "split(datum.gender_age, '_')[0] == 'male' ? 'Male' : 'Female'",
+        "as": "gender"
+      },
+      {
+        "calculate": "split(datum.gender_age, '_')[1] + '-' + (split(datum.gender_age, '_')[2] || 'above')",
+        "as": "age_group"
+      }
+    ],
+    "spacing": 0,
+    "hconcat": [
+      {
+        "height":250,
+        "width": 300,
+        "transform": [{
+          "filter": {"field": "gender", "equal": "Male"}
+        }],
+        "title": "Male",
+        "mark": "bar",
+        "encoding": {
+          "y": {
+            "field": "age_group",
+            "axis": null,
+            "sort": [
+              "90-above", "80-89", "70-79", 
+              "60-69", "50-59", "40-49", 
+              "30-39", "21-29", "18-20"
+            ]
+          },
+          "x": {
+            "aggregate": "sum",
+            "field": "population",
+            "title": "Number of Voters",
+            "axis": {"format": "s"},
+            "sort": "descending"
+            
+          },
+          "color": {
+            "field": "age_group",
+            "scale": {
+              "domain": ["18-20", "21-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-above"],
+              "range": ["coral", "coral", "coral", "coral", "grey", "grey", "grey", "grey", "grey"]
+            },
+            "legend": null
+          },
+          "tooltip": [
+            {"field": "age_group", "title": "Age Group"},
+            {"field": "gender", "title": "Gender"},
+            {"field": "population", "title": "Population", "format": "s"}
+          ]
+        }
+      },
+      {
+        "width": 20,
+        "view": {"stroke": null},
+        "mark": {
+          "type": "text",
+          "align": "center"
+        },
+        "encoding": {
+          "y": {
+            "field": "age_group",
+            "type": "ordinal",
+            "axis": null,
+            "sort": [
+              "90-above", "80-89", "70-79", 
+              "60-69", "50-59", "40-49", 
+              "30-39", "21-29", "18-20"
+            ]
+          },
+          "text": {"field": "age_group", "type": "nominal"}
+        }
+      },
+      {
+        "height":250,
+        "width":300,
+        "transform": [{
+          "filter": {"field": "gender", "equal": "Female"}
+        }],
+        "title": "Female",
+        "mark": "bar",
+        "encoding": {
+          "y": {
+            "field": "age_group",
+            "title": null,
+            "axis": null,
+            "sort": [
+              "90-above", "80-89", "70-79", 
+              "60-69", "50-59", "40-49", 
+              "30-39", "21-29", "18-20"
+            ]
+          },
+          "x": {
+            "aggregate": "sum",
+            "field": "population",
+            "title": "Number of Voters",
+            "axis": {"format": "s"},
+            "sort": "ascending"
+            
+          },
+          "color": {
+            "field": "age_group",
+            "scale": {
+              "domain": ["18-20", "21-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-above"],
+              "range": ["coral", "coral", "coral", "coral", "grey", "grey", "grey", "grey", "grey"]
+            },
+            "legend": null
+          },
+          "tooltip": [
+            {"field": "age_group", "type": "nominal", "title": "Age Group"},
+            {"field": "gender",  "type": "nominal", "title": "Gender"},
+            {"field": "population",  "type": "quantitative", "title": "Population", "format": "s"}
+          ]
+        }
+      }
+    ],
+    "config": {
+      "view": {"stroke": null},
+      "axis": {"grid": false},
+      "background": "aliceblue"
+    }
+  }
+  

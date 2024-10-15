@@ -1,0 +1,70 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1200,
+    "height": 400,
+    "data": {
+      "url": "ne_1.json",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_10m_admin_1_states_provinces"
+      }
+    },
+    "transform": [
+      {
+        "lookup": "properties.name",
+        "from": {
+          "data": {
+            "url": "cleaned.csv",
+            "format": { "type": "csv" }
+          },
+          "key": "state",
+          "fields": ["majority", "Pakatan Harapan", "Barisan Nasional", "Perikatan Nasional", "Gabungan Rakyat Sabah", "Gabungan Parti Sarawak", "other"]
+        }
+      }
+    ],
+    "selection": {
+      "state_highlight": {
+        "type": "multi",
+        "fields": ["majority"],
+        "bind": "legend"
+      }
+    },
+    "mark": {
+      "type": "geoshape"
+    },
+    "encoding": {
+      "color": {
+        "field": "majority",
+        "type": "nominal",
+        "scale": {
+          "domain": ["Pakatan Harapan", "Barisan Nasional", "Perikatan Nasional", "Gabungan Rakyat Sabah", "Gabungan Parti Sarawak", "Tie", "other"],
+          "range": ["red", "blue", "green", "#9467bd", "purple", "black", "grey"]
+        }
+      },
+      "opacity": {
+        "condition": {
+          "selection": "state_highlight",
+          "value": 0.8
+        },
+        "value": 0.2
+      },
+      "tooltip": [
+        { "field": "properties.name", "type": "nominal", "title": "State" },
+        { "field": "majority", "type": "nominal", "title": "Majority"},
+        { "field": "Pakatan Harapan", "type": "quantitative", "title": "Pakatan Harapan Seats", "format": ","},
+        { "field": "Barisan Nasional", "type": "quantitative", "title": "Barisan Nasional Seats" , "format": ","},
+        { "field": "Perikatan Nasional", "type": "quantitative", "title": "Perikatan Nasional Seats", "format": ","},
+        { "field": "Gabungan Rakyat Sabah", "type": "quantitative", "title": "Gabungan Rakyat Sabah Seats" , "format": ","},
+        { "field": "Gabungan Parti Sarawak", "type": "quantitative", "title": "Gabungan Parti Sarawak Seats" , "format": ","},
+        { "field": "other", "type": "quantitative", "title": "Others Seats" , "format": ","}
+        
+      ]
+    },
+    "config": {
+      "view": {"stroke": null},
+      "axis": {"grid": false},
+      "background": "aliceblue"
+      
+    }
+  }
+  

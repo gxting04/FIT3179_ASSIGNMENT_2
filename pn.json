@@ -1,0 +1,53 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Perikatan Nasional",
+    "data": {
+      "url": "party_seats.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {
+        "filter": "datum.party === 'PAS' || datum.party === 'BERSATU'"
+      }
+    ],
+
+ 
+    "layer": [
+      {
+        "mark": {
+          "type": "arc",
+          "innerRadius": 20,
+          "stroke": "black",
+          "strokeWidth": 1
+        }},
+        {
+            "mark": {"type": "text", "radiusOffset": 10},
+            "encoding": {
+              "text": {"field": "seats", "type": "quantitative"},
+              "theta": {"field": "seats", "type": "quantitative", "stack": true}
+            }
+          }],
+        "encoding": {
+          "theta": {"field": "seats", "type": "quantitative", "stack": true},
+          "radius": {"field": "seats", "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}},
+          "color": {
+            "field": "party", 
+            "type": "nominal",
+            "scale": {
+              "domain": ["PAS", "BERSATU"],
+              "range": ["green", "lightcoral"]
+            }
+          },
+          "tooltip":[
+            {"field": "party", "type": "nominal"},
+            {"field": "seats", "type": "quantitative", "format": ","}
+          ]
+        },
+        "config": {
+      "view": {"stroke": null},
+      "axis": {"grid": false},
+      "background": "aliceblue"
+    }
+      
+  }
+  

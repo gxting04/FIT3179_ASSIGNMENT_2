@@ -1,0 +1,188 @@
+body{
+    background-color:aliceblue;
+ } 
+
+h1{
+    text-align: center;
+    margin-bottom: 0;
+    
+}
+
+h5{
+    text-align: center;
+    color: gray;
+    margin-top: 0;
+    line-height: 1; 
+    font-size: 22px;
+}
+
+p{
+    margin-top: 0;
+    text-align: left;
+    font-family: 'Afacad Flux';
+    font-size: 18px;
+}
+
+p2{
+    margin-top: 0;
+    text-align: left;
+    font-family: 'Afacad Flux';
+    font-size: 13px;
+}
+
+h2{
+    text-align: center;
+}
+
+
+h4{
+    text-align: center;
+    background-color: rgb(115, 163, 242);
+    font-size: 30px;
+    margin-bottom: 0;
+}
+
+h6{
+    text-align: center;
+    background-color: rgb(115, 163, 242);
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 50%; 
+    margin: 20px auto; 
+    border-collapse: collapse; 
+}
+
+
+
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+td {
+    background-color: white;
+    color: black;
+}
+
+
+.container {
+    text-align: center;
+    border: none;
+    background-color:aliceblue;
+}
+
+.container_last {
+    text-align: center;
+    border: none;
+    background-color:rgb(216, 214, 214);
+}
+
+.row {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the items */
+    margin: 0;
+}
+
+.col {
+    margin: 0 20px; /* Add some spacing between columns */
+}
+
+
+
+
+.stats {
+    text-align: center; /* Center text inside stat1 */
+}
+
+.stats_img {
+    width: 50px; /* Set a smaller size for the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.stats_img1 {
+    width: 47px; /* Set a smaller size for the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.stats_title {
+    font-size: 28px;
+    color: darkred; /* Increase font size for the title */
+    margin: 10px 0; /* Add margin above and below */
+}
+
+.stats_desc {
+    font-size: 16px; /* Adjust font size for description */
+    color: gray; /* Optional: change description color */
+    text-align: center;
+}
+
+
+
+#map {
+    width: 70%;
+    height: 200px; 
+    margin-left: 100px;
+    border: none;
+    padding: 0;
+}
+
+#pyramid {
+    
+    height: 400px; 
+    margin-left: -80px;
+}
+
+
+
+#coalition {
+   
+    height: 100px; /* Adjust as needed */
+    margin-left: -40px;
+}
+
+#govern {
+    
+    height: 800px; /* Adjust as needed */
+    margin-left: -40px;
+}
+
+#ethnicity {
+   
+    height: 400px; /* Adjust as needed */
+    margin-left: 50px;
+}
+
+
+#majority {
+    margin-left: -60px;
+    height: 200px;
+}
+
+
+#ph, #bn, #pn, #gps, #grs {
+    height: 300px;
+    margin-left: -40px;
+    margin: 0; 
+    padding: 0; 
+    margin-top: 10;
+}
+
+#important{
+    margin-top: 0;
+    text-align: left;
+    font-family: 'Afacad Flux';
+    font-size: 18px;
+    color: red;
+    
+}
+

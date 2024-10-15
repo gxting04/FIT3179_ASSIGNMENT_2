@@ -1,0 +1,65 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,  
+    "height": 500, 
+    "data": {
+        "url": "ne_1.json",
+        "format": { "type": "topojson", "feature": "ne_10m_admin_1_states_provinces" }
+    },
+
+    "params": [
+        {
+            "name": "density_above",
+            "value":0,
+            "bind":{
+                "input": "range",
+                "min": 0,
+                "max": 910,
+                "step": 5,
+                "name": "Voter Density Above: "
+            }
+        }
+    ],
+
+    "transform": [
+        {
+            "lookup": "properties.name",
+            "from": {
+                "data": {
+                    "url": "state_votes_with_area.csv"
+                },
+                "key": "state",
+                "fields": ["votes", "area"]
+            }
+        },
+        {
+            "calculate": "datum.votes/datum.area", "as": "Voter Density"
+        },
+        {
+            "filter": "datum.votes/datum.area > density_above"
+        }
+    ],
+
+    
+    "mark": { "type": "geoshape" },
+    "encoding": {
+        "color": {
+            "field": "Voter Density",
+            "type": "quantitative",
+            "scale": {
+                "scheme": "reds",
+                "type": "log"
+            }
+        },
+        "tooltip": [
+            { "field": "properties.name", "type": "nominal", "title": "State" },
+            { "field": "votes", "type": "quantitative", "title": "Total Votes", "format": "," },
+            { "field": "area", "type": "quantitative", "title": "Area (km²)", "format": "," }
+        ]
+    },
+    "config": {
+      "view": {"stroke": null},
+      "axis": {"grid": false},
+      "background": "aliceblue"
+    }
+}

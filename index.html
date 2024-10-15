@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Votes in each State of Malaysia</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+    <script src="vega_lite_vis.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>
+        A Deeper look into the people voice
+        <h5>Malaysia's 15th General Election</h5>
+    </h1>
+
+
+    <h2>Important Dates</h2>
+    <table>
+        <tr>
+            <th>Nomination</th>
+            <th>Polling</th>
+        </tr>
+        <tr>
+            <td>November 5, 2022</td>
+            <td>November 19, 2022</td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col">
+            <div class="stats">
+                <img class="stats_img" src="voter.png">
+                <h3 class="stats_title">21.1 Million</h3>
+                <p class="stats_desc">Total Number of eligible voters</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="stats">
+                <img class="stats_img1" src="percentage.png">
+                <h3 class="stats_title">73.89%</h3>
+                <p class="stats_desc">Final Voter Turnout Rate</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="stats">
+                <img class="stats_img" src="cost.png">
+                <h3 class="stats_title">RM1.1 Billion</h3>
+                <p class="stats_desc">Total cost for GE15</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h4>Political Influence Distribution Among Major Coalition</h4>
+        <p>
+            The results of Malaysia's 15th General Election shows significant changes in the political landscape. 
+            The Peninsular Malaysia became a battleground for the three major coalitions which are <b style="color: red;">Pakatan Harapan</b>, <b style="color: blue;">Barisan Nasional</b>, and <b style="color: green;">Perikatan Nasional</b>.
+            <b style="color: red;">Pakatan Harapan</b> showed strong support along the <b>west coast</b>, attracting many voters in urban areas. While <b style="color: green;">Perikatan Nasional</b> in other hand dominated the rural area, especially in the <b>north</b> and <b>east coasts</b>. In contrast, <b style="color: blue;">Barisan Nasional</b> struggled, managing to hold onto only <b>Negeri Sembilan</b> and <b>Sabah</b>, which highlights a shift in voter preferences.
+            In East Malaysia, the situation was different. <b style="color: purple;">Gabungan Parti Sarawak (GPS)</b> gained a significant majority in <b>Sarawak</b>, strengthening its position in the region. 
+        </p>
+        <div id="majority"></div>
+    </div>
+
+
+
+    <div class="container">
+        <h4>Seats by Coalition</h4>
+        <p>Malaysia's 15th General Election marked a historic moment as it resulted in a <b style="color: red;">hung parliament</b>, with no coalition securing the simple majority of 112 seats needed to form a government. 
+           This situation led to negotiations, as each coalition looked for support from the others. In the end, <b style="color: red;">Pakatan Harapan</b>
+           succeeded in forming a government with with the support of all other coalitions and parties, except for Perikatan Nasional, which became the only opposition coalition.
+        </p>
+        <div id="coalition"></div>
+    </div>
+
+    <div class="container">
+        <h6>The Power Behind each Coalition</h6>
+        <div class="row">
+            <div class="col">
+                <div id = "ph"></div>
+            </div>
+
+            <div class="col">
+            
+                    <div id = "bn"></div>
+            
+            </div>
+
+            <div class="col">
+                    <div id = "pn"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div id = "gps"></div>
+            </div>
+
+            <div class="col">
+                <div class="stats">
+                    <div id = "grs"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+
+    <div class="container">
+        <h4>Voter Density</h4>
+        <p>
+            The map shows a <b>high density</b> of voters along the <b>west coast</b> of Malaysia, especially in Selangor, Kuala Lumpur, and Penang. <b>Northern</b> Malaysia has a <b>moderate density</b> of voters, while <b>East Malaysia</b> has a <b>lower voter density</b>. 
+            This suggests that there might be a need to adjust the number of parliamentary seats in these areas to make sure each vote carries more equal value, ensuring fair representation for all.
+        </p>
+        <div id="map"></div>
+    </div>
+
+
+
+    <div class="container">
+        <h4>Demographic Statistics</h4>
+        <p>A large segment of Malaysia's voters is <b style="color: coral;">below 50 years old</b>, making it important for the government to focus on policies that appeal to this group. By addressing key issues like jobs, education, and healthcare, 
+            the government can strengthen its relationship with younger voters and maintain its political power.
+            Additionally, considering the country's ethnic composition, with the majority being <b style="color: steelblue;">Bumiputera</b>, it is essential for the government to also safeguard the interests of this community to ensure widespread support.
+        </p>
+        <div class="row">
+            <div class="col">
+                <div id = "pyramid"></div>
+            </div>
+
+            <div class="col">
+                <div class="stats">
+                    <div id = "ethnicity"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container_last">
+        
+        <p2>
+            Created by: <a href="https://github.com/gxting04">Ting Guang Xun</a> <br>
+            Completion Date: 15/10/2024 <br>
+            Data Sources: <br>
+                - <a href="https://github.com/Thevesh/analysis-election-msia/blob/main/data/candidates_ge15.csv" target="_blank">https://github.com/Thevesh/analysis-election-msia/blob/main/data/candidates_ge15.csv</a> (Author: Thevesh) <br>
+                - <a href="https://en.wikipedia.org/wiki/Parliament_of_Malaysia" target="_blank">https://en.wikipedia.org/wiki/Parliament_of_Malaysia</a> <br>
+        </p>
+        
+    </div>
+
+    
+</body>
+</html>
